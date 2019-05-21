@@ -1,11 +1,18 @@
 package cn.huangbaole.kotlinremote.demo.entiy
 
+import org.hibernate.annotations.NaturalId
 import java.util.Date
+import javax.persistence.CascadeType.MERGE
+import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToMany
+import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @Entity
@@ -13,16 +20,31 @@ import javax.persistence.Table
 data class Baby(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    var id: Long = -1,
     @Column(nullable = true)
-    var name: String,
+    var name: String = "",
     @Column(nullable = true)
-    var nickname: String,
+    var nickname: String = "",
+    @Column(nullable = true)
+    var avator: String = "",
     @Column(nullable = false)
-    var gender: Boolean,
+    var gender: Boolean = true,
     @Column(nullable = false)
-    var age: Int,
+    var age: Int = -1,
+    @Column(nullable = true)
+    var birthday: Date = Date(),
     @Column(nullable = false)
-    var createTime: Date = Date()
+    var createTime: Date = Date(),
+    @Column(nullable = true)
+    var mark: String? = null,
+
+    @ManyToOne(optional = false)
+    var parent: User,
+
+    @ManyToMany
+    @JoinTable(name = "baby_course_inner",
+        joinColumns = [JoinColumn(name = "baby_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "course_id", referencedColumnName = "id")])
+    var courses: List<Course>? = null
 
 )

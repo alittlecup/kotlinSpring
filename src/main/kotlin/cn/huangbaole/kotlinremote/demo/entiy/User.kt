@@ -1,12 +1,20 @@
 package cn.huangbaole.kotlinremote.demo.entiy
 
+import java.io.Serializable
 import java.util.Date
+import javax.persistence.CascadeType
+import javax.persistence.CascadeType.ALL
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType.EAGER
+import javax.persistence.FetchType.LAZY
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.OneToMany
 import javax.persistence.Table
+import javax.persistence.Transient
 
 @Entity
 @Table(name = "t_user")
@@ -17,11 +25,17 @@ data class User(
     @Column(nullable = false)
     var username: String? = null,
     @Column(nullable = false)
-    var password: String? = "123456",
+    var gender: Boolean = true,
+    @Column(nullable = true)
+    var avator: String? = null,
     @Column(nullable = false)
-    var email: String? = null,
+    var phone: String? = null,
     @Column(nullable = false)
     var createTime: Date = Date(),
     @Column(nullable = false)
-    var state: Int = 0
+    var state: Int = 0,
+    @Column(nullable = true)
+    var address: String? = null,
+    @Column(nullable = true)
+    var mark: String? = null
 )
