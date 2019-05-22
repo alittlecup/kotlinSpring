@@ -27,7 +27,7 @@ data class User(
     @Column(nullable = false)
     var gender: Boolean = true,
     @Column(nullable = true)
-    var avator: String? = null,
+    var avatar: String? = null,
     @Column(nullable = false)
     var phone: String? = null,
     @Column(nullable = false)
@@ -37,5 +37,10 @@ data class User(
     @Column(nullable = true)
     var address: String? = null,
     @Column(nullable = true)
-    var mark: String? = null
+    var mark: String? = null,
+
+    @OneToMany(cascade = [ALL], mappedBy = "parent")
+    var babies: List<Baby>? = null,
+    @OneToMany(cascade = [ALL], mappedBy = "user")
+    var cards: List<Card>? = null
 )

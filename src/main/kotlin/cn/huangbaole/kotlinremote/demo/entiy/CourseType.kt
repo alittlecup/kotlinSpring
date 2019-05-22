@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn
 import javax.persistence.ManyToMany
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
+import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
@@ -18,7 +19,7 @@ import javax.persistence.Table
 data class CourseType(
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    var id: Long=-1,
+    var id: Long = -1,
     @Column(nullable = false)
     var name: String,
     @Column(nullable = false)
@@ -35,15 +36,15 @@ data class CourseType(
 data class Course(
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    var id: Long=-1,
-    @ManyToOne
+    var id: Long = -1,
+    @OneToOne
     @JoinColumn(name = "course_type_id")
     var courseType: CourseType,
     @Column(nullable = false)
     var startTime: Date = Date(),
     @Column(nullable = false)
     @ManyToMany(mappedBy = "courses")
-    var babys: List<Baby>? = null,
+    var babies: List<Baby>? ,
     @Column(nullable = false)
     var mark: String? = null
 )

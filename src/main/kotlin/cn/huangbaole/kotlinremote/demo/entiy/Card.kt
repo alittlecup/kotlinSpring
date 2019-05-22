@@ -5,11 +5,14 @@ import javax.persistence.CascadeType.MERGE
 import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
+import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
@@ -18,7 +21,7 @@ data class Card(
     @Id
     @GeneratedValue(strategy = IDENTITY)
     var id: Long = -1,
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "card_type_id")
     var cardType: CardType,
     @Column(nullable = false)
@@ -30,7 +33,11 @@ data class Card(
     @Column(nullable = false)
     var real_count: Int,
     @Column(nullable = false)
-    var balance: Int
+    var balance: Int,
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    var user: User
+
 )
 
 @Entity
@@ -48,7 +55,12 @@ data class CardChargeRecord(
     @Column(nullable = false)
     var chargeCount: Int,
     @Column(nullable = false)
-    var chargeType: Int,
+    @Enumerated(EnumType.ORDINAL)
+    var chargeType: CardChargeType,
     @Column(nullable = false)
     var updateTime: Date = Date()
 )
+
+enum class CardChargeType {
+  MAKE_CARD, STOP_CARD, TRAIN
+}

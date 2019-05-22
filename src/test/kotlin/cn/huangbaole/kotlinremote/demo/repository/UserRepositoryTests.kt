@@ -18,14 +18,14 @@ class UserRepositoryTests {
 
   @Test
   fun testUser() {
-    var user = User(username = "Tom", gender = false, avator = "", phone = "13300980989", state = 0,
+    var user = User(username = "Tom", gender = false, avatar = "", phone = "13300980989", state = 0,
         address = "", mark = "鱼子介绍")
     userRepository.save(user)
     var tom = userRepository.findByUsernameAllIgnoringCase("tom")
     if (tom?.isNotEmpty()!!) {
-      var baby = Baby(name = "TomS", avator = "", age = 5, gender = false, nickname = "tt",
+      var baby = Baby(name = "TomS", avatar = "", age = 5, gender = false, nickname = "tt",
           parent = tom[0])
-      var babyt = Baby(name = "TomT", avator = "", age = 5, gender = false, nickname = "ss",
+      var babyt = Baby(name = "TomT", avatar = "", age = 5, gender = false, nickname = "ss",
           parent = tom[0])
       babyRepository.saveAll(arrayListOf(baby,babyt))
     }

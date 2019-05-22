@@ -2,6 +2,8 @@ package cn.huangbaole.kotlinremote.demo
 
 import cn.huangbaole.kotlinremote.demo.entiy.Baby
 import cn.huangbaole.kotlinremote.demo.entiy.Card
+import cn.huangbaole.kotlinremote.demo.entiy.CardKind.ALL_WEEK
+import cn.huangbaole.kotlinremote.demo.entiy.CardKind.MIDWEEK
 import cn.huangbaole.kotlinremote.demo.entiy.CardType
 import cn.huangbaole.kotlinremote.demo.entiy.CourseType
 import cn.huangbaole.kotlinremote.demo.entiy.User
@@ -43,7 +45,7 @@ class UserRepositoryTest {
   fun testUser() {
     userRepository.deleteAll()
     babyRepository.deleteAll()
-    var user = User(username = "Tom", gender = false, avator = "", phone = "13300980989", state = 0,
+    var user = User(username = "Tom", gender = false, avatar = "", phone = "13300980989", state = 0,
         address = "", mark = "鱼子介绍")
     userRepository.save(user)
 
@@ -52,10 +54,6 @@ class UserRepositoryTest {
   @Test
   fun testCard() {
 //    var findByUsernameLike = userRepository.findByUsernameLike("Tom")
-    var card = Card(cardType = cardTypeRepository.findByCountAndType(count = 48, type = 2)!!,
-        real_count = 54, real_prices = 10880, balance = 54)
-    var save = cardRepository.save(card)
-    print(save)
   }
 
   private fun addBaby(id: Long) {
@@ -106,21 +104,21 @@ class UserRepositoryTest {
   @Test
   fun textCardType() {
     cardTypeRepository.deleteAll()
-    var cardType241 = CardType(name = "24次周中卡", type = 1, count = 24, price = 7600,
+    var cardType241 = CardType(name = "24次周中卡", type = MIDWEEK, count = 24, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType242 = CardType(name = "24次任意卡", type = 2, count = 24, price = 7600,
+    var cardType242 = CardType(name = "24次任意卡", type = ALL_WEEK, count = 24, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType481 = CardType(name = "48次周中卡", type = 1, count = 48, price = 7600,
+    var cardType481 = CardType(name = "48次周中卡", type = MIDWEEK, count = 48, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType482 = CardType(name = "48次任意卡", type = 2, count = 48, price = 7600,
+    var cardType482 = CardType(name = "48次任意卡", type = ALL_WEEK, count = 48, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType661 = CardType(name = "66次周中卡", type = 1, count = 66, price = 7600,
+    var cardType661 = CardType(name = "66次周中卡", type = MIDWEEK, count = 66, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType662 = CardType(name = "66次任意卡", type = 2, count = 66, price = 7600,
+    var cardType662 = CardType(name = "66次任意卡", type = ALL_WEEK, count = 66, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType961 = CardType(name = "96次周中卡", type = 1, count = 96, price = 7600,
+    var cardType961 = CardType(name = "96次周中卡", type = MIDWEEK, count = 96, price = 7600,
         limit_time = 8 * 31, desc = "")
-    var cardType962 = CardType(name = "96次任意卡", type = 2, count = 96, price = 7600,
+    var cardType962 = CardType(name = "96次任意卡", type = ALL_WEEK, count = 96, price = 7600,
         limit_time = 8 * 31, desc = "")
 
     var cardtypes = arrayListOf<CardType>(cardType241, cardType242, cardType481, cardType482,
