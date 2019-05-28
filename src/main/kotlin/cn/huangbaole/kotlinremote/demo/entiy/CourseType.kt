@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
 import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
 import javax.persistence.ManyToMany
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
@@ -25,9 +26,9 @@ data class CourseType(
     @Column(nullable = false)
     var duration: Int,
     @Column(nullable = false)
-    var avator: String? = null,
+    var avatar: String? = null,
     @Column(nullable = false)
-    var desc: String? = null
+    var fdesc: String? = null
 
 )
 
@@ -43,8 +44,12 @@ data class Course(
     @Column(nullable = false)
     var startTime: Date = Date(),
     @Column(nullable = false)
-    @ManyToMany(mappedBy = "courses")
-    var babies: List<Baby>? ,
+    @ManyToMany
+    @JoinTable(name = "course_baby_inner",
+        inverseJoinColumns = [JoinColumn(name = "baby_id", referencedColumnName = "id")],
+        joinColumns = [JoinColumn(name = "course_id", referencedColumnName = "id")])
+    var babies: List<Baby>?,
+
     @Column(nullable = false)
     var mark: String? = null
 )

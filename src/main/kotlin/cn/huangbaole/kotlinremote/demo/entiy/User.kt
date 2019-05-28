@@ -1,5 +1,6 @@
 package cn.huangbaole.kotlinremote.demo.entiy
 
+import com.sun.xml.internal.bind.util.Which
 import java.io.Serializable
 import java.util.Date
 import javax.persistence.CascadeType
@@ -38,9 +39,24 @@ data class User(
     var address: String? = null,
     @Column(nullable = true)
     var mark: String? = null,
+    @OneToMany(cascade = [ALL])
+    var babies: MutableList<Baby> = mutableListOf(),
+    @OneToMany(cascade = [ALL])
+    var cards: MutableList<Card> = mutableListOf()
+) {
+  fun checkSelf(): String {
+    return when {
+      username.isNullOrEmpty() -> "用户名为空"
+      phone.isNullOrEmpty() -> "联系方式为空"
+      else -> ""
+    }
+  }
 
-    @OneToMany(cascade = [ALL], mappedBy = "parent")
-    var babies: List<Baby>? = null,
-    @OneToMany(cascade = [ALL], mappedBy = "user")
-    var cards: List<Card>? = null
-)
+  constructor(id: Long, username: String?, avatar: String?, phone: String?, state: Int) : this(){
+    this.id=id
+    this.username=username
+    this.avatar=avatar
+    this.phone=phone
+    this.state=state
+  }
+}

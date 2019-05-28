@@ -56,7 +56,11 @@ class ParentRepositoryTest {
   fun testMany() {
     var group = Group(name = "书法课")
     var group2 = Group(name = "游泳课")
-    var save = groupRepository.save(group)
+    var save = groupRepository.saveAll(arrayListOf(group, group2))
+
     print(save)
+    var child = childRepository.findById(2).get()
+    child.groups = groupRepository.findAll()
+    childRepository.save(child)
   }
 }

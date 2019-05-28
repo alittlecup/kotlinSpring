@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.CascadeType.ALL
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType.EAGER
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
@@ -49,8 +48,7 @@ data class Child(
     var groups: List<Group> = mutableListOf()
 ) {
   override fun toString(): String {
-    return "{child:{" +
-        "name:$nickname,id: $id}}"
+    return "Child(id=$id, nickname='$nickname', groups=$groups)"
   }
 }
 

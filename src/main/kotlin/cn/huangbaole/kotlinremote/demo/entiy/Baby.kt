@@ -1,17 +1,12 @@
 package cn.huangbaole.kotlinremote.demo.entiy
 
-import org.hibernate.annotations.NaturalId
 import java.util.Date
-import javax.persistence.CascadeType.MERGE
-import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
-import javax.persistence.ManyToMany
 import javax.persistence.ManyToOne
 import javax.persistence.Table
 
@@ -36,20 +31,28 @@ data class Baby(
     @Column(nullable = false)
     var createTime: Date = Date(),
     @Column(nullable = true)
-    var mark: String? = null,
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "parent_id")
-    var parent: User,
-
-    @ManyToMany
-    @JoinTable(name = "baby_course_inner",
-        joinColumns = [JoinColumn(name = "baby_id", referencedColumnName = "id")],
-        inverseJoinColumns = [JoinColumn(name = "course_id", referencedColumnName = "id")])
-    var courses: List<Course>? = null
+    var mark: String? = null
 
 ) {
+  constructor(id: Long, name: String, nickname: String, avatar: String, gender: Boolean,
+      age: Int) : this() {
+    this.id = id
+    this.name = name
+    this.nickname = nickname
+    this.avatar = avatar
+    this.gender = gender
+    this.age = age
+  }
+
   override fun toString(): String {
-    return "Baby(id=$id, name='$name', nickname='$nickname', avatar='$avatar', gender=$gender, age=$age, birthday=$birthday, createTime=$createTime, mark=$mark, courses=$courses)"
+    return "Baby(id=$id, name='$name', nickname='$nickname', avatar='$avatar', gender=$gender, age=$age, birthday=$birthday, createTime=$createTime, mark=$mark)"
+  }
+
+  fun check(): String {
+    return when {
+      name.isNullOrEmpty() && nickname.isNullOrEmpty() -> "姓名或者乳名不能为空"
+      age <= 0 -> "年龄不能为空"
+      else -> ""
+    }
   }
 }

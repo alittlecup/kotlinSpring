@@ -21,7 +21,6 @@ import java.lang.management.ManagementFactory;
 import javax.management.ObjectName;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -51,7 +50,6 @@ class SampleDataJpaApplicationTests {
 
 	private MockMvc mvc;
 
-	@BeforeEach
 	public void setUp() {
 		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
 	}
