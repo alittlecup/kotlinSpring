@@ -1,11 +1,9 @@
 package cn.huangbaole.kotlinremote.demo.exception
 
 import cn.huangbaole.kotlinremote.demo.http.Result
-import cn.huangbaole.kotlinremote.demo.http.Result.Companion
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
-import sun.java2d.pipe.SpanShapeRenderer.Simple
 import java.lang.Exception
 import javax.servlet.http.HttpServletRequest
 

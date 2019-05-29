@@ -1,8 +1,5 @@
 package cn.huangbaole.kotlinremote.demo.http
 
-import org.dom4j.dom.DOMNodeHelper.getData
-import org.dom4j.dom.DOMNodeHelper.setData
-import sun.print.ServiceDialog.getMsg
 import java.io.Serializable
 
 class Result<T> : Serializable {
